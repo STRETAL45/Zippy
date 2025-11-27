@@ -16,6 +16,7 @@
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
@@ -80,6 +81,39 @@
             color: #E365B0;
         }
 
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #1A4892;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
         /* Hero Section */
         .hero {
             padding: 160px 0 80px;
@@ -88,13 +122,14 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             margin-bottom: 1rem;
             font-weight: 700;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 3vw, 1.3rem);
             margin-bottom: 2rem;
             opacity: 0.9;
             max-width: 600px;
@@ -133,6 +168,13 @@
             color: #1A4892;
         }
 
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
         /* Features Section */
         .features {
             padding: 80px 0;
@@ -142,20 +184,21 @@
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             margin-bottom: 3rem;
             color: #1A4892;
+            line-height: 1.2;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
         .feature-card {
             background: #f8f9fa;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 20px;
             text-align: center;
             transition: transform 0.3s ease;
@@ -167,8 +210,8 @@
         }
 
         .feature-icon {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             margin: 0 auto 1rem;
             background: linear-gradient(45deg, #1A4892, #E365B0);
             border-radius: 20px;
@@ -176,12 +219,13 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
 
         .feature-card h3 {
             color: #1A4892;
             margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
 
         /* App Showcase */
@@ -194,14 +238,14 @@
         .showcase-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 3rem;
             align-items: center;
         }
 
         .app-screenshot {
             background: white;
-            padding: 20px;
-            border-radius: 30px;
+            padding: 15px;
+            border-radius: 25px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             transform: perspective(1000px) rotateY(-5deg);
             transition: transform 0.3s ease;
@@ -213,12 +257,15 @@
 
         .app-screenshot img {
             width: 100%;
-            border-radius: 20px;
+            height: auto;
+            border-radius: 15px;
+            display: block;
         }
 
         .showcase-text h2 {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
 
         .app-features {
@@ -249,18 +296,18 @@
         .download-steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
             margin: 3rem 0;
         }
 
         .step {
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .step-number {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(45deg, #E365B0, #1A4892);
             border-radius: 50%;
             display: flex;
@@ -268,7 +315,7 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin: 0 auto 1rem;
         }
 
@@ -283,8 +330,9 @@
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin: 2rem 0;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
@@ -299,28 +347,93 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .container {
+                padding: 0 15px;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.98);
+                width: 100%;
+                text-align: center;
+                padding: 2rem 0;
+                gap: 0;
+                transition: right 0.3s ease;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                padding: 1rem 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .hero {
+                padding: 140px 0 60px;
             }
 
             .showcase-content {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             .app-screenshot {
                 transform: none;
+                order: -1;
             }
 
-            .cta-buttons {
-                display: flex;
+            .features {
+                padding: 60px 0;
+                border-radius: 30px 30px 0 0;
+            }
+
+            .download {
+                padding: 60px 0;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .feature-card {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 120px 0 40px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .download-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
                 flex-direction: column;
                 gap: 1rem;
             }
-
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
             .cta-button.secondary {
                 margin-left: 0;
             }
@@ -336,6 +449,11 @@
                     <div class="logo-icon"></div>
                     <span>Zippy</span>
                 </div>
+                <button class="mobile-menu-toggle" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <ul class="nav-links">
                     <li><a href="#features">Возможности</a></li>
                     <li><a href="#app">Приложение</a></li>
@@ -409,10 +527,7 @@
         <div class="container">
             <div class="showcase-content">
                 <div class="app-screenshot">
-                    <!-- Замените на реальный скриншот вашего приложения -->
-                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); height: 500px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
-                       <img src="photo_2025-11-23_17-44-50.jpg" alt="Главный экран приложения Zippy" loading="lazy">
-                    </div>
+                    <img src="photo_2025-11-23_17-44-50.jpg" alt="Главный экран приложения Zippy" loading="lazy">
                 </div>
                 <div class="showcase-text">
                     <h2>Инновации в каждой поездке</h2>
@@ -437,7 +552,7 @@
     <section class="download" id="download">
         <div class="container">
             <h2 class="section-title">Скачайте Zippy сейчас</h2>
-            <p style="font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto 2rem;">Всего 3 простых шага до вашей первой безопасной поездки</p>
+            <p style="font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto 2rem;">Всего 3 простых шага до вашей первой безопасной поездки</p>
             
             <div class="download-steps">
                 <div class="step">
@@ -457,7 +572,7 @@
                 </div>
             </div>
 
-            <a href="https://cloud.mail.ru/public/RBRB/yRZRfj1K1" class="cta-button" target="_blank" style="font-size: 1.3rem; padding: 20px 40px;">
+            <a href="https://cloud.mail.ru/public/RBRB/yRZRfj1K1" class="cta-button" target="_blank" style="font-size: 1.1rem; padding: 15px 30px;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
@@ -492,6 +607,23 @@
     </footer>
 
     <script>
+        // Мобильное меню
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
         // Плавная прокрутка для навигации
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
